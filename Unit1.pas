@@ -66,7 +66,7 @@ begin
    sgDec.Cells[2,0]:='Срок';
    sgDec.Cells[3,0]:='Количество';
 
-   sgDec.ColWidths[0]:=250;
+   sgDec.ColWidths[0]:=150;
    sgDec.ColWidths[1]:=150;
    sgDec.ColWidths[2]:=85;
    sgDec.ColWidths[3]:=85;
@@ -84,7 +84,7 @@ begin
    sgDec.Cells[2,0]:='Срок';
    sgDec.Cells[3,0]:='Количество';
 
-   sgDec.ColWidths[0]:=250;
+   sgDec.ColWidths[0]:=150;
    sgDec.ColWidths[1]:=150;
    sgDec.ColWidths[2]:=85;
    sgDec.ColWidths[3]:=85;
@@ -252,7 +252,7 @@ var
    isAdd:boolean;
 begin
    try
-      T:=StrToDate(edtDecide.Text);
+      T:=StrToDate(edtDecide.Text);//Преобразуем строку в TD
    except
       Application.MessageBox( 'Значение Поставка до не введено, либо не является датой',
                             'Не удалось решить');
@@ -263,9 +263,9 @@ begin
    InitDec(DopDec2);
    lstCountry.Clear;
    while not IsEmpty(Dec) do begin
-      if GetTop(Dec).Limit<T then begin
-         AddBottom(DopDec2,GetTop(Dec));
-         AddTop(ResDec,GetTop(Dec));
+      if GetTop(Dec).Limit<T then begin //Провераем на условие
+         AddBottom(DopDec2,GetTop(Dec)); // узнать информационную часть вершины НЕпустого стека
+         AddTop(ResDec,GetTop(Dec)); // добавление элемента в голову стека
          isAdd:=true;
          for i:=0 to lstCountry.Lines.Count-1 do
             if lstCountry.Lines[i]=GetTop(Dec).Country then isAdd:=false;
@@ -284,7 +284,7 @@ begin
    sgDec.Cells[2,0]:='Срок';
    sgDec.Cells[3,0]:='Количество';
 
-   sgDec.ColWidths[0]:=250;
+   sgDec.ColWidths[0]:=150;
    sgDec.ColWidths[1]:=150;
    sgDec.ColWidths[2]:=85;
    sgDec.ColWidths[3]:=85;
